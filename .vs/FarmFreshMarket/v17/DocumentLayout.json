@@ -1,0 +1,261 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\migrations\\20260209225140_addlastlogintimetomember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\migrations\\20260209225140_addlastlogintimetomember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\pages\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\pages\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\middleware\\passwordexpirymiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\middleware\\passwordexpirymiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\services\\ipasswordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\services\\ipasswordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\services\\passwordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\services\\passwordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\viewmodels\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\viewmodels\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\services\\sessionmanagerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\services\\sessionmanagerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\models\\passwordpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\models\\passwordpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\pages\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\pages\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|c:\\users\\amber\\dropbox\\pc\\desktop\\application security\\farmfreshmarket\\farmfreshmarket\\pages\\changepassword.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99D8D9E7-63D1-44AC-8F31-9A148C8E84F1}|FarmFreshMarket\\FarmFreshMarket.csproj|solutionrelative:farmfreshmarket\\pages\\changepassword.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{66f449b5-c823-40bc-9016-02b4d06a1a8e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260209225140_AddLastLoginTimeToMember.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Migrations\\20260209225140_AddLastLoginTimeToMember.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Migrations\\20260209225140_AddLastLoginTimeToMember.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Migrations\\20260209225140_AddLastLoginTimeToMember.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Migrations\\20260209225140_AddLastLoginTimeToMember.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:51:41.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAwE8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:46:10.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Pages\\Register.cshtml.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Register.cshtml.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Pages\\Register.cshtml.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAADwv4gAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:44:51.267Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Program.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Program.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Program.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Program.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAADwv2EAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:35:51.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Index.cshtml",
+              "RelativeToolTip": "FarmFreshMarket\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAAwLMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T22:36:14.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PasswordExpiryMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Middleware\\PasswordExpiryMiddleware.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Middleware\\PasswordExpiryMiddleware.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Middleware\\PasswordExpiryMiddleware.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Middleware\\PasswordExpiryMiddleware.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAgwC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:43:07.179Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Member.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\ViewModels\\Member.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\ViewModels\\Member.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\ViewModels\\Member.cs",
+              "RelativeToolTip": "FarmFreshMarket\\ViewModels\\Member.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:40:09.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Pages\\Login.cshtml.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\Login.cshtml.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Pages\\Login.cshtml.cs",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAAwKUBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:34:32.347Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PasswordService.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Services\\PasswordService.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Services\\PasswordService.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Services\\PasswordService.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Services\\PasswordService.cs",
+              "ViewState": "AgIAANwAAAAAAAAAAAAAwPgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:21:41.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IPasswordService.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Services\\IPasswordService.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Services\\IPasswordService.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Services\\IPasswordService.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Services\\IPasswordService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:33:23.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SessionManagerService.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Services\\SessionManagerService.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Services\\SessionManagerService.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Services\\SessionManagerService.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Services\\SessionManagerService.cs",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAAANwAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:37:56.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PasswordPolicy.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Models\\PasswordPolicy.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Models\\PasswordPolicy.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Models\\PasswordPolicy.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Models\\PasswordPolicy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:20:53.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Pages\\ChangePassword.cshtml",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\ChangePassword.cshtml",
+              "RelativeToolTip": "FarmFreshMarket\\Pages\\ChangePassword.cshtml",
+              "ViewState": "AgIAAKYAAAAAAAAAAAAgwMEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-09T22:26:33.625Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ChangePassword.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\ChangePassword.cshtml.cs",
+              "RelativeDocumentMoniker": "FarmFreshMarket\\Pages\\ChangePassword.cshtml.cs",
+              "ToolTip": "C:\\Users\\amber\\Dropbox\\PC\\Desktop\\Application Security\\FarmFreshMarket\\FarmFreshMarket\\Pages\\ChangePassword.cshtml.cs",
+              "RelativeToolTip": "FarmFreshMarket\\Pages\\ChangePassword.cshtml.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAAwJkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-09T22:28:09.857Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

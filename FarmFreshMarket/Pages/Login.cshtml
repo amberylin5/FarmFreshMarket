@@ -1,0 +1,191 @@
+﻿@page
+@model FarmFreshMarket.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <h2 class="text-center mb-4">Login</h2>
+
+            @if (TempData["MultipleSessionsWarning"] != null)
+            {
+                <div class="alert alert-warning alert-dismissible fade show">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    @TempData["MultipleSessionsWarning"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["ResendMessage"] != null)
+            {
+                <div class="alert alert-info alert-dismissible fade show">
+                    <i class="fas fa-info-circle"></i>
+                    @TempData["ResendMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <i class="fas fa-exclamation-circle"></i>
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <p class="mb-0"><i class="fas fa-exclamation-circle"></i> @error.ErrorMessage</p>
+                    }
+                </div>
+            }
+
+            @if (Model.RequiresTwoFactor)
+            {
+                <!-- 2FA VERIFICATION FORM -->
+                <div class="card shadow border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">
+                            <i class="fas fa-shield-alt"></i> Two-Factor Authentication
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Verification code has been sent!</strong><br />
+                            <small>Check your email <strong>@Model.TwoFactorEmail</strong></small>
+                        </div>
+
+                        <form method="post" asp-page-handler="VerifyTwoFactor">
+                            <div class="mb-3">
+                                <label class="form-label">6-Digit Code *</label>
+                                <!-- CHANGE: Use name="code" instead of asp-for -->
+                                <input name="code" class="form-control text-center"
+                                       maxlength="6" placeholder="123456"
+                                       style="font-size: 1.5rem; letter-spacing: 5px;"
+                                       autofocus />
+                                @if (ViewData.ModelState["TwoFactorCode"]?.Errors?.Count > 0)
+                                {
+                                    <span class="text-danger small">@ViewData.ModelState["TwoFactorCode"].Errors[0].ErrorMessage</span>
+                                }
+                                <small class="text-muted">Enter the 6-digit code sent to you</small>
+                            </div>
+
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-check-circle"></i> Verify & Continue
+                                </button>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-secondary" asp-page-handler="ResendCode">
+                                    <i class="fas fa-redo"></i> Resend Code
+                                </button>
+
+                                <a href="/Login?reset=true" class="btn btn-outline-danger ms-2">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted small">
+                        <i class="fas fa-clock"></i> Code expires in 10 minutes
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!-- REGULAR LOGIN FORM -->
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">Enter Credentials</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Email Address *</label>
+                                <input asp-for="LoginData.Email" class="form-control"
+                                       placeholder="user@example.com" />
+                                <span asp-validation-for="LoginData.Email" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Password *</label>
+                                <input asp-for="LoginData.Password" type="password" class="form-control"
+                                       placeholder="Enter your password" />
+                                <span asp-validation-for="LoginData.Password" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </button>
+
+                                <div class="text-center mt-3">
+                                    <a href="/Register" class="btn btn-outline-secondary">
+                                        <i class="fas fa-user-plus"></i> Create Account
+                                    </a>
+                                    <a href="/ForgotPassword" class="btn btn-outline-secondary">
+                                        <i class="fas fa-key"></i> Forgot Password?
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+
+            <!-- Security Note -->
+            <div class="alert alert-light border mt-3">
+                <small>
+                    <i class="fas fa-lock"></i>
+                    <strong>Security Features:</strong> Rate limiting, account lockout after 3 failed attempts,
+                    session management, and optional two-factor authentication.
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-submit when 6 digits entered
+            const codeInput = document.querySelector('input[name="code"]');
+            if (codeInput) {
+                codeInput.addEventListener('input', function(e) {
+                    if (this.value.length === 6) {
+                        this.form.submit();
+                    }
+                });
+            }
+
+            // Check URL for reset parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const resetParam = urlParams.get('reset');
+
+            if (resetParam === 'true') {
+                // Clear any stored form data
+                document.querySelectorAll('input').forEach(input => {
+                    if (input.type !== 'hidden') {
+                        input.value = '';
+                    }
+                });
+            }
+
+            // Check for 2FA requirement on page load
+            const requires2FA = @(Model.RequiresTwoFactor.ToString().ToLower());
+            if (requires2FA && codeInput) {
+                codeInput.focus();
+            }
+        });
+    </script>
+}

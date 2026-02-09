@@ -1,0 +1,149 @@
+﻿@page
+@model FarmFreshMarket.Pages.ManageSessionsModel
+@{
+    ViewData["Title"] = "Manage Sessions";
+}
+
+<div class="container mt-4">
+    <h1><i class="fas fa-desktop"></i> Active Sessions</h1>
+    <p class="text-muted">Manage your logged-in devices and sessions</p>
+
+    <!-- Multiple Sessions Warning -->
+    @if (Model.HasMultipleSessions)
+    {
+        <div class="alert alert-warning">
+            <h5><i class="fas fa-exclamation-triangle"></i> Multiple Active Sessions Detected</h5>
+            <p>You're currently logged in from <strong>@Model.ActiveSessions.Count</strong> device(s).</p>
+            <p class="mb-0">For security, you may want to log out from other devices.</p>
+        </div>
+    }
+
+    <!-- Active Sessions List -->
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0"><i class="fas fa-list"></i> Current Session</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.CurrentSession != null)
+            {
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-laptop"></i> This Device</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Device:</strong> @Model.CurrentSession.DeviceInfo</p>
+                            <p class="mb-1"><strong>IP Address:</strong> <code>@Model.CurrentSession.IPAddress</code></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Logged in:</strong> @Model.CurrentSession.LoginTime.ToLocalTime().ToString("g")</p>
+                            <p class="mb-1"><strong>Last activity:</strong> @Model.CurrentSession.LastActivity?.ToLocalTime().ToString("g")</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Other Active Sessions -->
+    @if (Model.OtherSessions.Any())
+    {
+        <div class="card mt-4">
+            <div class="card-header bg-warning text-dark">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Other Active Sessions</h5>
+                    <span class="badge bg-danger">@Model.OtherSessions.Count active</span>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th><i class="fas fa-desktop"></i> Device</th>
+                                <th><i class="fas fa-globe"></i> IP Address</th>
+                                <th><i class="fas fa-clock"></i> Login Time</th>
+                                <th><i class="fas fa-history"></i> Last Activity</th>
+                                <th><i class="fas fa-power-off"></i> Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var session in Model.OtherSessions)
+                            {
+                                <tr>
+                                    <td>
+                                        <i class="fas @(session.DeviceInfo.Contains("Mobile") ? "fa-mobile-alt" : "fa-desktop")"></i>
+                                        @session.DeviceInfo
+                                    </td>
+                                    <td><code>@session.IPAddress</code></td>
+                                    <td><small>@session.LoginTime.ToLocalTime().ToString("g")</small></td>
+                                    <td><small>@session.LastActivity?.ToLocalTime().ToString("g")</small></td>
+                                    <td>
+                                        <form method="post" asp-page-handler="TerminateSession">
+                                            <input type="hidden" name="sessionToken" value="@session.SessionToken" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="fas fa-sign-out-alt"></i> Log Out
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <form method="post" asp-page-handler="TerminateAllOther">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> Log Out From All Other Devices
+                    </button>
+                    <small class="text-muted ms-2">This will keep you logged in on this device only.</small>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card mt-4">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                <h5>No Other Active Sessions</h5>
+                <p class="text-muted">You're only logged in from this device.</p>
+            </div>
+        </div>
+    }
+
+    <!-- Session Stats -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6><i class="fas fa-info-circle"></i> Session Information</h6>
+                    <p class="mb-1"><strong>Total Active Sessions:</strong> @Model.ActiveSessions.Count</p>
+                    <p class="mb-1"><strong>Session Timeout:</strong> 30 minutes of inactivity</p>
+                    <p class="mb-0"><strong>Security:</strong> Sessions automatically expire after timeout</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6><i class="fas fa-shield-alt"></i> Security Tips</h6>
+                    <ul class="small mb-0">
+                        <li>Regularly review active sessions</li>
+                        <li>Log out from unused devices</li>
+                        <li>Use strong, unique passwords</li>
+                        <li>Enable 2FA if available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-primary">
+            <i class="fas fa-home"></i> Back to Home
+        </a>
+        <a href="/Logout" class="btn btn-outline-danger ms-2">
+            <i class="fas fa-sign-out-alt"></i> Logout from All Devices
+        </a>
+    </div>
+</div>

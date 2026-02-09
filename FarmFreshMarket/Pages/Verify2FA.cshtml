@@ -1,0 +1,105 @@
+﻿@page
+@model FarmFreshMarket.Pages.Verify2FAModel
+@{
+    ViewData["Title"] = "Verify Two-Factor Authentication";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-shield-alt"></i> Two-Factor Authentication
+            </h2>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    <h5><i class="fas fa-exclamation-triangle"></i> Errors:</h5>
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <p class="mb-0">@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+
+            <div class="card shadow border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title mb-0">Enter Verification Code</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Verification code has been sent!</strong><br>
+                        <small>
+                            @if (Model.DeliveryMethod == "Email")
+                            {
+                                <span>Check your email <strong>@Model.UserEmail</strong></span>
+                            }
+                            else if (Model.DeliveryMethod == "SMS")
+                            {
+                                <span>Check your SMS messages</span>
+                            }
+                            else
+                            {
+                                <span>Check your email and SMS messages</span>
+                            }
+                        </small>
+                    </div>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="UserId" />
+                        <input type="hidden" asp-for="DeliveryMethod" />
+
+                        <div class="mb-3">
+                            <label class="form-label">6-Digit Code *</label>
+                            <input asp-for="Code" class="form-control text-center"
+                                   maxlength="6" placeholder="123456"
+                                   style="font-size: 1.5rem; letter-spacing: 5px;"
+                                   autofocus required />
+                            <span asp-validation-for="Code" class="text-danger small"></span>
+                            <small class="text-muted">Enter the 6-digit code sent to you</small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-check-circle"></i> Verify & Continue
+                            </button>
+
+                            <form method="post" asp-page-handler="Resend">
+                                <input type="hidden" asp-for="UserId" />
+                                <button type="submit" class="btn btn-outline-secondary w-100">
+                                    <i class="fas fa-redo"></i> Resend Code
+                                </button>
+                            </form>
+
+                            <a href="/Login" class="btn btn-outline-danger">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted small">
+                    <i class="fas fa-clock"></i> Code expires in 10 minutes
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Auto-submit when 6 digits entered
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeInput = document.getElementById('Code');
+            if (codeInput) {
+                codeInput.addEventListener('input', function(e) {
+                    if (this.value.length === 6) {
+                        this.form.submit();
+                    }
+                });
+            }
+        });
+    </script>
+}

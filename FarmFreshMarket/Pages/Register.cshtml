@@ -1,0 +1,356 @@
+﻿@page
+@model FarmFreshMarket.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4 text-center">Join Fresh Farm Market</h1>
+
+            <!-- XSS Demonstration Alert -->
+            <div class="alert alert-info">
+                <h5><i class="fas fa-shield-alt"></i> XSS Security Note</h5>
+                <p>
+                    <strong>Script tags are allowed for demonstration!</strong>
+                    Try entering <code>&lt;script&gt;alert('test')&lt;/script&gt;</code> in any field.
+                    The system will encode it to prevent execution while still saving your input.
+                </p>
+                <a href="/XSSDemo" class="btn btn-sm btn-outline-info">Learn about XSS Protection</a>
+            </div>
+
+            <!-- MAIN FORM - Only ONE form tag on the page -->
+            <form method="post" enctype="multipart/form-data" id="registerForm">
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                <!-- Personal Info -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="RModel.FullName">Full Name *</label>
+                            <input type="text" asp-for="RModel.FullName" class="form-control" required />
+                            <span asp-validation-for="RModel.FullName" class="text-danger"></span>
+                            <small class="text-muted">Try: <code>John&lt;script&gt;alert('XSS')&lt;/script&gt;Doe</code></small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="RModel.Email">Email Address *</label>
+                            <input type="email" asp-for="RModel.Email" class="form-control" required />
+                            <span asp-validation-for="RModel.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Card -->
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.CreditCardNo">Credit Card Number *</label>
+                    <input type="text" asp-for="RModel.CreditCardNo" class="form-control" required />
+                    <small class="text-muted">We encrypt your card for security (13-16 digits)</small>
+                    <span asp-validation-for="RModel.CreditCardNo" class="text-danger"></span>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="RModel.Gender">Gender</label>
+                            <select asp-for="RModel.Gender" class="form-select">
+                                <option value="">-- Select --</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                            <span asp-validation-for="RModel.Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="RModel.MobileNo">Mobile Number *</label>
+                            <input type="tel" asp-for="RModel.MobileNo" class="form-control" required />
+                            <span asp-validation-for="RModel.MobileNo" class="text-danger"></span>
+                            <small class="text-muted">8-digit Singapore number starting with 8 or 9</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Address -->
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.DeliveryAddress">Delivery Address *</label>
+                    <textarea asp-for="RModel.DeliveryAddress" class="form-control" rows="3" required></textarea>
+                    <span asp-validation-for="RModel.DeliveryAddress" class="text-danger"></span>
+                    <small class="text-muted">Try: <code>123 &lt;iframe&gt;&lt;/iframe&gt; Street</code></small>
+                </div>
+
+                <!-- PASSWORD SECTION WITH STRENGTH METER -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Password Security</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="RModel.Password">Password *</label>
+                            <input type="password" asp-for="RModel.Password" class="form-control"
+                                   id="passwordInput" onkeyup="checkPasswordStrength()" required />
+                            <span asp-validation-for="RModel.Password" class="text-danger"></span>
+
+                            <!-- Password Strength Meter -->
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>Password Strength:</small>
+                                    <small id="passwordStrengthText" class="fw-bold">Very Weak</small>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div id="passwordStrengthBar" class="progress-bar"
+                                         style="width: 0%;"></div>
+                                </div>
+
+                                <!-- Requirements Checklist -->
+                                <div class="mt-3">
+                                    <small class="text-muted d-block mb-2">Password must contain:</small>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="reqLength" disabled>
+                                                <label class="form-check-label" for="reqLength">
+                                                    <span id="reqLengthText">At least 12 characters</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="reqUpper" disabled>
+                                                <label class="form-check-label" for="reqUpper">
+                                                    <span id="reqUpperText">Uppercase letter (A-Z)</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="reqLower" disabled>
+                                                <label class="form-check-label" for="reqLower">
+                                                    <span id="reqLowerText">Lowercase letter (a-z)</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="reqNumber" disabled>
+                                                <label class="form-check-label" for="reqNumber">
+                                                    <span id="reqNumberText">Number (0-9)</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="reqSpecial" disabled>
+                                                <label class="form-check-label" for="reqSpecial">
+                                                    <span id="reqSpecialText">Special character</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" asp-for="RModel.ConfirmPassword">Confirm Password *</label>
+                            <input type="password" asp-for="RModel.ConfirmPassword" class="form-control"
+                                   id="confirmPassword" onkeyup="checkPasswordMatch()" required />
+                            <span asp-validation-for="RModel.ConfirmPassword" class="text-danger"></span>
+                            <small id="passwordMatch" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Upload -->
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.Photo">Profile Photo *</label>
+                    <input type="file" asp-for="RModel.Photo" class="form-control" accept=".jpg,.jpeg" required />
+                    <small class="text-muted">JPG format only</small>
+                    <span asp-validation-for="RModel.Photo" class="text-danger"></span>
+                </div>
+
+                <!-- About Me -->
+                <div class="mb-4">
+                    <label class="form-label" asp-for="RModel.AboutMe">About Me</label>
+                    <textarea asp-for="RModel.AboutMe" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="RModel.AboutMe" class="text-danger"></span>
+                    <small class="text-muted">Try: <code>&lt;img src="x" onerror="alert(1)"&gt; I love programming!</code></small>
+                </div>
+
+                <!-- 🔥 reCAPTCHA v3 -->
+                <div class="mb-3">
+                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+                    <div class="alert alert-info small">
+                        <i class="fas fa-shield-alt"></i> Protected by reCAPTCHA - Google's
+                        <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and
+                        <a href="https://policies.google.com/terms" target="_blank">Terms</a> apply.
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    <a href="/Login" class="btn btn-outline-secondary">
+                        Already have an account? Login here
+                    </a>
+                </div>
+            </form>
+
+            <!-- XSS Test Section - NO FORM TAGS HERE -->
+            <div class="card mt-4">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0"><i class="fas fa-flask"></i> XSS Test Examples</h5>
+                </div>
+                <div class="card-body">
+                    <p>Try these XSS payloads to test our protection:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6>Basic Script</h6>
+                                    <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
+                                    <small class="d-block mt-1">Will save as encoded text</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6>Image with Error</h6>
+                                    <code>&lt;img src="x" onerror="alert(1)"&gt;</code>
+                                    <small class="d-block mt-1">Event handler won't trigger</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6>Iframe</h6>
+                                    <code>&lt;iframe src="evil.com"&gt;&lt;/iframe&gt;</code>
+                                    <small class="d-block mt-1">Will display as text only</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Password Strength Script -->
+<script>
+    // Password strength checker
+    function checkPasswordStrength() {
+        const password = document.getElementById('passwordInput').value;
+        const bar = document.getElementById('passwordStrengthBar');
+        const text = document.getElementById('passwordStrengthText');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Check requirements
+        const hasLength = password.length >= 12;
+        const hasUpper = /[A-Z]/.test(password);
+        const hasLower = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecial = /[^A-Za-z0-9]/.test(password);
+
+        // Update checkboxes
+        updateCheckbox('reqLength', hasLength, '✓ 12+ characters', '✗ 12+ characters');
+        updateCheckbox('reqUpper', hasUpper, '✓ Uppercase letter', '✗ Uppercase letter');
+        updateCheckbox('reqLower', hasLower, '✓ Lowercase letter', '✗ Lowercase letter');
+        updateCheckbox('reqNumber', hasNumber, '✓ Number', '✗ Number');
+        updateCheckbox('reqSpecial', hasSpecial, '✓ Special character', '✗ Special character');
+
+        // Calculate strength score (0-100)
+        let score = 0;
+        if (hasLength) score += 20;
+        if (hasUpper) score += 20;
+        if (hasLower) score += 20;
+        if (hasNumber) score += 20;
+        if (hasSpecial) score += 20;
+
+        // Update progress bar
+        bar.style.width = score + '%';
+
+        // Set color and text based on score
+        if (score < 40) {
+            bar.className = 'progress-bar bg-danger';
+            text.textContent = 'Very Weak';
+        } else if (score < 60) {
+            bar.className = 'progress-bar bg-warning';
+            text.textContent = 'Weak';
+        } else if (score < 80) {
+            bar.className = 'progress-bar bg-info';
+            text.textContent = 'Good';
+        } else if (score < 100) {
+            bar.className = 'progress-bar bg-primary';
+            text.textContent = 'Strong';
+        } else {
+            bar.className = 'progress-bar bg-success';
+            text.textContent = 'Very Strong!';
+        }
+
+        // Enable/disable submit button
+        const isStrongEnough = score >= 60;
+        if (submitBtn) {
+            submitBtn.disabled = !isStrongEnough;
+        }
+    }
+
+    function updateCheckbox(id, isMet, successText, failText) {
+        const checkbox = document.getElementById(id);
+        const label = document.getElementById(id + 'Text');
+
+        if (checkbox && label) {
+            checkbox.checked = isMet;
+            label.textContent = isMet ? successText : failText;
+            label.className = isMet ? 'text-success' : 'text-danger';
+        }
+    }
+
+    // Password confirmation checker
+    function checkPasswordMatch() {
+        const password = document.getElementById('passwordInput').value;
+        const confirm = document.getElementById('confirmPassword').value;
+        const matchText = document.getElementById('passwordMatch');
+
+        if (!matchText) return;
+
+        if (confirm.length === 0) {
+            matchText.textContent = '';
+        } else if (password === confirm) {
+            matchText.textContent = '✓ Passwords match';
+            matchText.className = 'text-success';
+        } else {
+            matchText.textContent = '✗ Passwords do not match';
+            matchText.className = 'text-danger';
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        checkPasswordStrength();
+        checkPasswordMatch();
+    });
+</script>
+
+<!-- 🔥 reCAPTCHA Script -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', {action: 'register'})
+        .then(function(token) {
+            var input = document.getElementById('g-recaptcha-response');
+            if (input) {
+                input.value = token;
+                console.log('reCAPTCHA token set');
+            }
+        });
+    });
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

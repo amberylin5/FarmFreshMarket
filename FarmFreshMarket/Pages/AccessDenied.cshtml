@@ -1,0 +1,40 @@
+﻿@page
+@model FarmFreshMarket.Pages.AccessDeniedModel
+@{
+    ViewData["Title"] = "Access Denied";
+    Layout = "_Layout";
+}
+
+<div class="container text-center mt-5">
+    <h1 class="display-1 text-danger">403</h1>
+    <h2>Access Denied</h2>
+    <p class="lead">You don't have permission to access this page.</p>
+
+    <div class="alert alert-danger mt-4" style="max-width: 500px; margin: 0 auto;">
+        <h5><i class="fas fa-lock"></i> Restricted Area</h5>
+        <p class="mb-0">This page requires <strong>Administrator</strong> privileges.</p>
+    </div>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="alert alert-info mt-3" style="max-width: 500px; margin: 0 auto;">
+            <h6><i class="fas fa-user"></i> Current User</h6>
+            <p class="mb-0">Logged in as: <strong>@User.Identity.Name</strong></p>
+            <p class="mb-0">Role: <strong>Regular User</strong></p>
+        </div>
+
+        <div class="mt-4">
+            <a href="/" class="btn btn-primary">Go Home</a>
+            <a href="/Logout" class="btn btn-outline-danger">Logout</a>
+            <a href="/RegularUser" class="btn btn-outline-primary">Go to User Dashboard</a>
+        </div>
+    }
+    else
+    {
+        <div class="mt-4">
+            <a href="/Login" class="btn btn-primary">Login</a>
+            <a href="/Register" class="btn btn-success">Register</a>
+            <a href="/" class="btn btn-outline-secondary">Go Home</a>
+        </div>
+    }
+</div>

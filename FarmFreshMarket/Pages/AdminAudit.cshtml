@@ -1,0 +1,107 @@
+﻿@page
+@model FarmFreshMarket.Pages.AdminAuditModel
+@{
+    ViewData["Title"] = "Audit Logs";
+}
+
+<div class="container mt-4">
+    <h1><i class="fas fa-clipboard-list"></i> Audit Logs</h1>
+    <p class="text-muted">System activity log for security monitoring</p>
+
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-history"></i> Recent Activities</h5>
+                <span class="badge bg-light text-dark">@Model.AuditLogs.Count records</span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.AuditLogs.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th><i class="fas fa-user"></i> User</th>
+                                <th><i class="fas fa-cog"></i> Action</th>
+                                <th><i class="fas fa-info-circle"></i> Description</th>
+                                <th><i class="fas fa-clock"></i> Time</th>
+                                <th><i class="fas fa-globe"></i> IP Address</th>
+                                <th><i class="fas fa-check-circle"></i> Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var log in Model.AuditLogs)
+                            {
+                                <tr>
+                                    <td>
+                                        <small class="text-muted">@log.UserEmail</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge @GetActionBadgeClass(log.Action)">
+                                            @log.Action
+                                        </span>
+                                    </td>
+                                    <td>@log.Description</td>
+                                    <td>
+                                        <small>@log.Timestamp.ToLocalTime().ToString("g")</small>
+                                    </td>
+                                    <td>
+                                        <code class="small">@log.IPAddress</code>
+                                    </td>
+                                    <td>
+                                        @if (log.Success)
+                                        {
+                                            <span class="badge bg-success"><i class="fas fa-check"></i> Success</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger"><i class="fas fa-times"></i> Failed</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-clipboard fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No audit logs found</p>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">
+                <i class="fas fa-info-circle"></i> Logs are automatically recorded for security monitoring
+            </small>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/Admin" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Admin Panel
+        </a>
+        <a href="/" class="btn btn-outline-secondary ms-2">
+            <i class="fas fa-home"></i> Home
+        </a>
+    </div>
+</div>
+
+@functions {
+    private string GetActionBadgeClass(string action)
+    {
+        return action switch
+        {
+            "Login" => "bg-success",
+            "Logout" => "bg-info",
+            "Registration" => "bg-primary",
+            "FailedLogin" => "bg-warning",
+            "AccountLocked" => "bg-danger",
+            "AccessDenied" => "bg-dark",
+            _ => "bg-secondary"
+        };
+    }
+}

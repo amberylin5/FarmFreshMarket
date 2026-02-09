@@ -1,0 +1,275 @@
+﻿@page
+@model FarmFreshMarket.Pages.Manage2FAModel
+@{
+    ViewData["Title"] = "Manage Two-Factor Authentication";
+}
+
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Current Status -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Current 2FA Status</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">2FA Status:</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Is2FAEnabled)
+                    {
+                        <span class="badge bg-success">ENABLED</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">DISABLED</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-4">Delivery Method:</dt>
+                <dd class="col-sm-8">@Model.TwoFAMethod</dd>
+
+                <dt class="col-sm-4">Email:</dt>
+                <dd class="col-sm-8">@Model.UserEmail</dd>
+
+                <dt class="col-sm-4">Phone Number:</dt>
+                <dd class="col-sm-8">
+                    @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                    {
+                        <span>@Model.FormatPhoneNumber(Model.PhoneNumber)</span>
+
+                        @if (Model.IsPhoneVerified)
+                        {
+                            <span class="badge bg-success ms-2">✓ Verified</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning ms-2">⚠️ Not Verified</span>
+                        }
+
+                        <div class="mt-1">
+                            <small class="text-muted">Format: +65 XXXX XXXX</small>
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Not set</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Enable/Disable 2FA -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Enable/Disable 2FA</h4>
+        </div>
+        <div class="card-body">
+            @if (!Model.Is2FAEnabled)
+            {
+                <form method="post" class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label">Select Delivery Method:</label>
+                        <div>
+                            <button type="submit" name="method" value="Email" class="btn btn-outline-primary me-2"
+                                    asp-page-handler="Enable">
+                                <i class="fas fa-envelope"></i> Email Only
+                            </button>
+                            <button type="submit" name="method" value="Both" class="btn btn-outline-primary"
+                                    asp-page-handler="Enable">
+                                <i class="fas fa-mobile-alt"></i> Email & SMS
+                            </button>
+                        </div>
+                        <small class="form-text text-muted">SMS requires phone verification</small>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form method="post" class="row g-3">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-danger" asp-page-handler="Disable">
+                            <i class="fas fa-ban"></i> Disable 2FA
+                        </button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+
+    <!-- Phone Number Management -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4><i class="fas fa-mobile-alt"></i> Phone Number Management</h4>
+        </div>
+        <div class="card-body">
+            @if (string.IsNullOrEmpty(Model.PhoneNumber))
+            {
+                <!-- Add Phone Number -->
+                <h5>Add Phone Number</h5>
+                <form method="post" class="row g-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text">+65</span>
+                            <input type="tel" class="form-control" name="phoneNumber"
+                                   placeholder="XXXX XXXX" required>
+                        </div>
+                        <small class="form-text text-muted">Enter 8-digit Singapore number (e.g., 8265 5274)</small>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary" asp-page-handler="AddPhone">
+                            <i class="fas fa-plus-circle"></i> Add Phone
+                        </button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <h5>Phone Number: @Model.FormatPhoneNumber(Model.PhoneNumber)</h5>
+
+                @if (!Model.IsPhoneVerified)
+                {
+                    <!-- Phone needs verification -->
+                    <div class="alert alert-warning mt-3">
+                        <h6><i class="fas fa-mobile-alt"></i> Phone Number Needs Verification</h6>
+                        <p>A 6-digit verification code has been sent to:</p>
+                        <p class="h5"><strong>@Model.FormatPhoneNumber(Model.PhoneNumber)</strong></p>
+
+                        <form method="post" class="row g-3 mt-3">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    <input type="text" class="form-control text-center" name="code"
+                                           placeholder="123456" maxlength="6" required
+                                           style="font-size: 1.2rem; letter-spacing: 3px;">
+                                </div>
+                                <small class="form-text text-muted">Enter the 6-digit code from SMS</small>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-success" asp-page-handler="VerifyPhone">
+                                    <i class="fas fa-check-circle"></i> Verify Phone
+                                </button>
+                                <button type="submit" class="btn btn-outline-secondary" asp-page-handler="ResendCode">
+                                    <i class="fas fa-redo"></i> Resend Code
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Update phone number -->
+                    <h6 class="mt-4"><i class="fas fa-edit"></i> Update Phone Number</h6>
+                    <form method="post" class="row g-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">+65</span>
+                                <input type="tel" class="form-control" name="newPhoneNumber"
+                                       placeholder="XXXX XXXX" value="@Model.PhoneNumber.Substring(2)">
+                            </div>
+                            <small class="form-text text-muted">Enter 8-digit Singapore number</small>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-warning" asp-page-handler="UpdatePhone">
+                                <i class="fas fa-sync-alt"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <!-- Phone is verified -->
+                    <div class="alert alert-success mt-3">
+                        <h6><i class="fas fa-check-circle"></i> Phone Number Verified</h6>
+                        <p>Your phone is ready for SMS delivery.</p>
+
+                        <div class="mt-3">
+                            <form method="post" class="d-inline">
+                                <button type="submit" class="btn btn-info" asp-page-handler="TestSms">
+                                    <i class="fas fa-sms"></i> Send Test SMS
+                                </button>
+                            </form>
+
+                            <form method="post" class="d-inline ms-2">
+                                <div class="input-group">
+                                    <span class="input-group-text">+65</span>
+                                    <input type="tel" class="form-control" name="newPhoneNumber"
+                                           placeholder="XXXX XXXX" style="width: 150px;">
+                                    <button type="submit" class="btn btn-warning" asp-page-handler="UpdatePhone">
+                                        <i class="fas fa-edit"></i> Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <!-- Change Delivery Method -->
+    @if (Model.Is2FAEnabled)
+    {
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Change Delivery Method</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" class="row g-3">
+                    <div class="col-md-8">
+                        <div>
+                            <button type="submit" name="method" value="Email"
+                                    class="btn @(Model.TwoFAMethod == "Email" ? "btn-primary" : "btn-outline-primary") me-2"
+                                    asp-page-handler="ChangeMethod">
+                                <i class="fas fa-envelope"></i> Email Only
+                            </button>
+                            <button type="submit" name="method" value="Both"
+                                    class="btn @(Model.TwoFAMethod == "Both" ? "btn-primary" : "btn-outline-primary")"
+                                    asp-page-handler="ChangeMethod">
+                                <i class="fas fa-mobile-alt"></i> Email & SMS
+                            </button>
+                        </div>
+                        @if (Model.TwoFAMethod == "Both" && !Model.IsPhoneVerified)
+                        {
+                            <div class="alert alert-warning mt-2">
+                                <small><i class="fas fa-exclamation-triangle"></i> SMS won't work until phone is verified</small>
+                            </div>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+
+@section Scripts {
+    <script>
+        // Add spacing to phone number input
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInputs = document.querySelectorAll('input[type="tel"]');
+            phoneInputs.forEach(input => {
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 4) {
+                        value = value.substring(0, 4) + ' ' + value.substring(4, 8);
+                    }
+                    e.target.value = value;
+                });
+            });
+        });
+    </script>
+}
