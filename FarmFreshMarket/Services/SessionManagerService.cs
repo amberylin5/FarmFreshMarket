@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace FarmFreshMarket.Services
 {
@@ -60,6 +61,37 @@ namespace FarmFreshMarket.Services
             return "Desktop";
         }
 
+        // Sanitize user input for logging
+        private static string SanitizeForLog(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+
+            // Remove newlines and control characters that could forge log entries
+            var sanitized = input
+                .Replace("\n", " ")
+                .Replace("\r", " ")
+                .Replace("\t", " ")
+                .Replace(Environment.NewLine, " ");
+
+            // Remove any remaining control characters
+            var result = new StringBuilder();
+            foreach (char c in sanitized)
+            {
+                if (!char.IsControl(c))
+                {
+                    result.Append(c);
+                }
+                else
+                {
+                    result.Append(' ');
+                }
+            }
+
+            // Truncate to prevent excessively long logs
+            return result.Length > 200 ? result.ToString(0, 200) + "..." : result.ToString();
+        }
+
         public async Task<string> CreateSessionAsync(string userId, string ipAddress, string userAgent)
         {
             try
@@ -85,7 +117,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error creating session for user {UserId}", userId);
+                // Sanitize userId before logging
+                var sanitizedUserId = SanitizeForLog(userId);
+                _logger.LogError(ex, "Error creating session for user {UserId}", sanitizedUserId);
                 return null!;
             }
         }
@@ -117,7 +151,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error creating session for user {UserId}", userId);
+                // Sanitize userId before logging
+                var sanitizedUserId = SanitizeForLog(userId);
+                _logger.LogError(ex, "Error creating session for user {UserId}", sanitizedUserId);
                 return false;
             }
         }
@@ -133,7 +169,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting active sessions for user {UserId}", userId);
+                // Sanitize userId before logging
+                var sanitizedUserId = SanitizeForLog(userId);
+                _logger.LogError(ex, "Error getting active sessions for user {UserId}", sanitizedUserId);
                 return new List<UserSession>();
             }
         }
@@ -156,7 +194,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error terminating session {SessionToken}", sessionToken);
+                // FIXED: Apply sanitization to sessionToken before logging
+                var sanitizedToken = SanitizeForLog(sessionToken);
+                _logger.LogError(ex, "Error terminating session {SessionToken}", sanitizedToken);
                 return false;
             }
         }
@@ -181,7 +221,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error terminating other sessions for user {UserId}", userId);
+                // Sanitize userId before logging
+                var sanitizedUserId = SanitizeForLog(userId);
+                _logger.LogError(ex, "Error terminating other sessions for user {UserId}", sanitizedUserId);
                 return false;
             }
         }
@@ -201,7 +243,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating last activity for session {SessionToken}", sessionToken);
+                // FIXED: Apply sanitization to sessionToken before logging
+                var sanitizedToken = SanitizeForLog(sessionToken);
+                _logger.LogError(ex, "Error updating last activity for session {SessionToken}", sanitizedToken);
             }
         }
 
@@ -241,7 +285,9 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting active session count for user {UserId}", userId);
+                // Sanitize userId before logging
+                var sanitizedUserId = SanitizeForLog(userId);
+                _logger.LogError(ex, "Error getting active session count for user {UserId}", sanitizedUserId);
                 return 0;
             }
         }
