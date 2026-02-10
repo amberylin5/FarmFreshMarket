@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using System.Text;
 
 namespace FarmFreshMarket.Services
 {
@@ -25,6 +26,37 @@ namespace FarmFreshMarket.Services
             _context = context;
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
+        }
+
+        // Sanitize user input for logging
+        private static string SanitizeForLog(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+
+            // Remove newlines and control characters that could forge log entries
+            var sanitized = input
+                .Replace("\n", " ")
+                .Replace("\r", " ")
+                .Replace("\t", " ")
+                .Replace(Environment.NewLine, " ");
+
+            // Remove any remaining control characters
+            var result = new StringBuilder();
+            foreach (char c in sanitized)
+            {
+                if (!char.IsControl(c))
+                {
+                    result.Append(c);
+                }
+                else
+                {
+                    result.Append(' ');
+                }
+            }
+
+            // Truncate to prevent excessively long logs
+            return result.Length > 200 ? result.ToString(0, 200) + "..." : result.ToString();
         }
 
         private string GetClientIP()
@@ -85,14 +117,22 @@ namespace FarmFreshMarket.Services
                 _context.AuditLogs.Add(log);
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation($"✅ Audit Log Saved: {action} - {description}");
-                Console.WriteLine($"✅ AUDIT LOG SAVED: {action} - {description}");
+                // Sanitize action and description before logging
+                var sanitizedAction = SanitizeForLog(action);
+                var sanitizedDescription = SanitizeForLog(description);
+
+                _logger.LogInformation("✅ Audit Log Saved: {Action} - {Description}", sanitizedAction, sanitizedDescription);
+                Console.WriteLine($"✅ AUDIT LOG SAVED: {sanitizedAction} - {sanitizedDescription}");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"❌ Error saving audit log for action: {action}");
+                // Sanitize action before logging
+                var sanitizedAction = SanitizeForLog(action);
+                var sanitizedUserEmail = SanitizeForLog(userEmail);
+
+                _logger.LogError(ex, "❌ Error saving audit log for action: {Action}", sanitizedAction);
                 Console.WriteLine($"❌ AUDIT LOG ERROR: {ex.Message}");
-                Console.WriteLine($"Action: {action}, User: {userEmail}");
+                Console.WriteLine($"Action: {sanitizedAction}, User: {sanitizedUserEmail}");
 
                 // Try a simplified log without UserAgent
                 await TrySimpleLogAsync(userId, userEmail, action, description, success, additionalInfo);
@@ -119,11 +159,14 @@ namespace FarmFreshMarket.Services
                 _context.AuditLogs.Add(simpleLog);
                 await _context.SaveChangesAsync();
 
-                Console.WriteLine($"✅ Saved simplified audit log for: {action}");
+                // Sanitize before logging to console
+                var sanitizedAction = SanitizeForLog(action);
+                Console.WriteLine($"✅ Saved simplified audit log for: {sanitizedAction}");
             }
             catch (Exception ex2)
             {
-                Console.WriteLine($"❌ Even simplified log failed: {ex2.Message}");
+                var sanitizedMessage = SanitizeForLog(ex2.Message);
+                Console.WriteLine($"❌ Even simplified log failed: {sanitizedMessage}");
             }
         }
 
