@@ -117,7 +117,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error validating session for user {userId}");
+                _logger.LogError(ex, "Error creating session for user {UserId}", userId);
                 return false;
             }
         }
@@ -156,7 +156,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error terminating session {sessionToken}");
+                _logger.LogError(ex, "Error terminating session {SessionToken}", sessionToken);
                 return false;
             }
         }
