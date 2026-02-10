@@ -85,7 +85,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error creating session for user {userId}");
+                _logger.LogError(ex, "Error creating session for user {UserId}", userId);
                 return null!;
             }
         }
@@ -133,7 +133,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error getting active sessions for user {userId}");
+                _logger.LogError(ex, "Error getting active sessions for user {UserId}", userId);
                 return new List<UserSession>();
             }
         }
@@ -181,7 +181,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error terminating other sessions for user {userId}");
+                _logger.LogError(ex, "Error terminating other sessions for user {UserId}", userId);
                 return false;
             }
         }
@@ -201,7 +201,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error updating last activity for session {sessionToken}");
+                _logger.LogError(ex, "Error updating last activity for session {SessionToken}", sessionToken);
             }
         }
 
@@ -241,7 +241,7 @@ namespace FarmFreshMarket.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error getting active session count for user {userId}");
+                _logger.LogError(ex, "Error getting active session count for user {UserId}", userId);
                 return 0;
             }
         }
